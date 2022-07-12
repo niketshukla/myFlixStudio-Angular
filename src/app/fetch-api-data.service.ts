@@ -7,6 +7,12 @@ import { map } from 'rxjs/operators';
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://myflixstudio.herokuapp.com/';
 
+// Get Authorization token stored in local storage
+const token = localStorage.getItem('token');
+
+// Get Username stored in local storage
+const username = localStorage.getItem('user');
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +20,7 @@ const apiUrl = 'https://myflixstudio.herokuapp.com/';
 export class UserRegistrationService {
   // Inject the HttpClient module to the constructor params
  // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
  // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -24,7 +29,7 @@ export class UserRegistrationService {
     );
   }
 
-private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
     console.error('Some error occurred:', error.error.message);
     } else {
