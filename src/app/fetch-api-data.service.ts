@@ -70,10 +70,20 @@ export class UserLoginService {
 
   getAllMovies(): Observable<any> {
     return this.http
-      .get(apiUrl + 'movies')
+      .get(apiUrl + 'movies', {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -93,10 +103,20 @@ export class getSingleMovie {
 
   getSingleMovie(title: any): Observable<any> {
     return this.http
-      .get(apiUrl + `movies/${title}`)
+      .get(apiUrl + `movies/${title}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -116,10 +136,20 @@ export class getDirector {
 
   getDirector(name: any): Observable<any> {
     return this.http
-      .get(apiUrl + `movies/director/${name}`)
+      .get(apiUrl + `movies/director/${name}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -139,10 +169,20 @@ export class GetGenreService {
 
   getGenre(name: any): Observable<any> {
     return this.http
-      .get(apiUrl + `movies/genre/${name}`)
+      .get(apiUrl + `movies/genre/${name}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -160,12 +200,22 @@ export class GetGenreService {
 export class GetUserService {
   constructor(private http: HttpClient) { }
 
-  getUser(username: any): Observable<any> {
+  getUser(): Observable<any> {
     return this.http
-      .get(apiUrl + `users/${username}`)
+      .get(apiUrl + `users/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -185,10 +235,20 @@ export class favoriteMovies {
 
   getFavoriteMovies(username: any): Observable<any> {
     return this.http
-      .get(apiUrl + `users/${username}/movies`)
+      .get(apiUrl + `users/${username}/movies`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -206,12 +266,22 @@ export class favoriteMovies {
 export class addFavorite {
   constructor(private http: HttpClient) { }
 
-  addFavoriteMovie(username: any, movieID: string): Observable<any> {
+  addFavoriteMovie(movieID: string): Observable<any> {
     return this.http
-      .post(apiUrl + `users/${username}/movies/${movieID}`, null)
+      .post(apiUrl + `users/${username}/movies/${movieID}`, null, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -229,12 +299,22 @@ export class addFavorite {
 export class removeFavorite {
   constructor(private http: HttpClient) { }
 
-  removeFavoriteMovie(username: any, movieID: any): Observable<any> {
+  removeFavoriteMovie(movieID: any): Observable<any> {
     return this.http
-      .delete(apiUrl + `users/${username}/movies/${movieID}`)
+      .delete(apiUrl + `users/${username}/movies/${movieID}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -252,12 +332,22 @@ export class removeFavorite {
 export class userUpdate {
   constructor(private http: HttpClient) { }
 
-  editUser(username: any, updateDetails: any): Observable<any> {
+  editUser(updateDetails: any): Observable<any> {
     return this.http
-      .put(apiUrl + `users/${username}`, updateDetails)
+      .put(apiUrl + `users/${username}`, updateDetails, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -278,10 +368,20 @@ export class removeUser {
 
   deleteUser(username: any): Observable<any> {
     return this.http
-      .delete(apiUrl + `users/${username}`)
+      .delete(apiUrl + `users/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      })
       .pipe(
+        map(this.extractResponseData),
         catchError(this.handleError)
       );
+  }
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
