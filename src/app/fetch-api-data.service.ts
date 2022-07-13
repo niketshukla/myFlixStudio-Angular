@@ -17,7 +17,7 @@ const username = localStorage.getItem('user');
   providedIn: 'root'
 })
 
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {}
@@ -28,46 +28,12 @@ export class UserRegistrationService {
     catchError(this.handleError)
     );
   }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-    'Something bad happened; please try again later.');
-  }
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-// User login
-export class UserLoginService {
-  constructor(private http: HttpClient) { }
   //Making the api call for the user login endpoint
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(catchError(this.handleError));
   }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
- //Get Movies
- export class getAllMovies {
-  constructor(private http: HttpClient) { }
-
+  //Making the api call for the all movies endpoint
   getAllMovies(): Observable<any> {
     return this.http
       .get(apiUrl + 'movies', {
@@ -80,27 +46,7 @@ export class UserLoginService {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-//Get a single movie 
-export class getSingleMovie {
-  constructor(private http: HttpClient) { }
-
+  //Get a single movie
   getSingleMovie(title: any): Observable<any> {
     return this.http
       .get(apiUrl + `movies/${title}`, {
@@ -113,27 +59,7 @@ export class getSingleMovie {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-//get director
-export class getDirector {
-  constructor(private http: HttpClient) { }
-
+  //get director
   getDirector(name: any): Observable<any> {
     return this.http
       .get(apiUrl + `movies/director/${name}`, {
@@ -146,27 +72,7 @@ export class getDirector {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-// Get Genre
-export class GetGenreService {
-  constructor(private http: HttpClient) { }
-
+  // Get Genre
   getGenre(name: any): Observable<any> {
     return this.http
       .get(apiUrl + `movies/genre/${name}`, {
@@ -179,27 +85,7 @@ export class GetGenreService {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-//Get User
-export class GetUserService {
-  constructor(private http: HttpClient) { }
-
+  //Get User
   getUser(): Observable<any> {
     return this.http
       .get(apiUrl + `users/${username}`, {
@@ -212,27 +98,7 @@ export class GetUserService {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-//get movies to favorite
-export class favoriteMovies {
-  constructor(private http: HttpClient) { }
-
+  //get movies to favorite
   getFavoriteMovies(username: any): Observable<any> {
     return this.http
       .get(apiUrl + `users/${username}/movies`, {
@@ -245,27 +111,7 @@ export class favoriteMovies {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-// add movie to favorite
-export class addFavorite {
-  constructor(private http: HttpClient) { }
-
+  // add movie to favorite
   addFavoriteMovie(movieID: string): Observable<any> {
     return this.http
       .post(apiUrl + `users/${username}/movies/${movieID}`, null, {
@@ -278,27 +124,7 @@ export class addFavorite {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-// remove movie to favorite
-export class removeFavorite {
-  constructor(private http: HttpClient) { }
-
+  // remove movie to favorite
   removeFavoriteMovie(movieID: any): Observable<any> {
     return this.http
       .delete(apiUrl + `users/${username}/movies/${movieID}`, {
@@ -311,27 +137,7 @@ export class removeFavorite {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-//edit user
-export class userUpdate {
-  constructor(private http: HttpClient) { }
-
+  //edit user
   editUser(updateDetails: any): Observable<any> {
     return this.http
       .put(apiUrl + `users/${username}`, updateDetails, {
@@ -344,28 +150,7 @@ export class userUpdate {
         catchError(this.handleError)
       );
   }
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Something bad happened; please try again later.');
-  }
-}
-
-
-//delete user
-export class removeUser {
-  constructor(private http: HttpClient) { }
-
+  //delete user
   deleteUser(username: any): Observable<any> {
     return this.http
       .delete(apiUrl + `users/${username}`, {
@@ -385,12 +170,13 @@ export class removeUser {
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+    console.error('Some error occurred:', error.error.message);
     } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
+    console.error(
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
     }
-    return throwError('Something bad happened; please try again later.');
+    return throwError(
+    'Something bad happened; please try again later.');
   }
 }
