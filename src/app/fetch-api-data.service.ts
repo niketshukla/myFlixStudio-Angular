@@ -99,7 +99,7 @@ export class FetchApiDataService {
       );
   }
   //get movies to favorite
-  getFavoriteMovies(username: any): Observable<any> {
+  getFavoriteMovies(): Observable<any> {
     return this.http
       .get(apiUrl + `users/${username}/movies`, {
         headers: new HttpHeaders({
@@ -151,7 +151,7 @@ export class FetchApiDataService {
       );
   }
   //delete user
-  deleteUser(username: any): Observable<any> {
+  deleteUser(): Observable<any> {
     return this.http
       .delete(apiUrl + `users/${username}`, {
         headers: new HttpHeaders({
@@ -170,7 +170,7 @@ export class FetchApiDataService {
   }
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
     console.error(
         `Error Status code ${error.status}, ` +
