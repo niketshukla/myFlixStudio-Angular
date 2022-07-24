@@ -23,9 +23,12 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  /**
-   * allows user to edit their data, such as Username, password, email, and birthday
+/**
+   * updates the user's data in database
+   * displays a message for successfully updated profile
+   * reloads the page
+   * @function editUserProfile
+   * @returns a users updated data in json format 
    */
   editUser(): void {
     console.log(this.userData);

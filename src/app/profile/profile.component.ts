@@ -142,9 +142,11 @@ export class ProfileComponent implements OnInit {
   }
 
   /**
-   * removes a movie from the list of favorite movies via an API call
-   * @param id 
-   * @function removeFavoriteMovie
+   * use API end-point to remove a movie from user's favorites
+   * @function deleteFavoriteMovies
+   * @param id {string}
+   * @param title {string}
+   * @returns updated user's data in json format
    */
   removeFromFavoriteMovies(id: string, title: string): void {
     console.log(id);

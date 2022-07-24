@@ -112,9 +112,11 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * adds a movie to the list of favorite movies via an API call
-   * @param id 
-   * @function addFavoriteMovie
+   * use API end-point to add a movie to user's favorites
+   * @function addFavoriteMovies
+   * @param id {string}
+   * @param title {string}
+   * @returns an array of the movie object in json format
    */
   addToFavoriteMovies(id: string, title: string): void {
     console.log(id);
@@ -130,9 +132,11 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * removes a movie from the list of favorite movies via an API call
-   * @param id 
-   * @function removeFavoriteMovie
+   * user API end-point to remove a movie from user's favorites
+   * @function deleteFavoriteMovies
+   * @param id {string}
+   * @param title {string}
+   * @returns updated user's data in json format
    */
   removeFromFavoriteMovies(id: string, title: string): void {
     console.log(id);
