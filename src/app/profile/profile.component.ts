@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
+import { GenreComponent } from '../genre/genre.component';
+import { DirectorComponent } from '../director/director.component';
+import { SynopsisComponent } from '../synopsis/synopsis.component';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +18,10 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: any = {};
+  username: any = localStorage.getItem('user');
+  movies: any[] = [];
+  favoriteMovies: any[] = [];
+  displayElement: boolean = false
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -25,6 +32,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.getFavoriteMovies();
   }
 
   /**
@@ -65,5 +73,88 @@ export class ProfileComponent implements OnInit {
         localStorage.clear();
       });
     }
+  }
+
+  /**
+   * gets a user's FavoriteMovies
+   * @function getAllMovies
+   */
+  getFavoriteMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      this.movies.forEach((movie: any) => {
+        if (this.user.favoriteMovies.includes(movie._id)) {
+          this.favoriteMovies.push(movie);
+        }
+      });
+    });
+    console.log(this.favoriteMovies);
+  }
+
+  /**
+  * opens the user genre dialog from GenreComponent to displaying details
+  * @param name
+  * @param description
+  */
+   openGenreDialog(name: string, description: string): void {
+    this.dialog.open(GenreComponent, {
+      data: {
+        name: name,
+        description: description,
+      },
+      // Assign dialog width
+      width: '500px'
+    });
+  }
+
+  /**
+  * opens the user director dialog from DirectorComponent to displaying details
+  * @param name
+  * @param bio
+  * @param birthday
+  */
+  openDirectorDialog(name: string, bio: string, birth: string): void {
+    this.dialog.open(DirectorComponent, {
+      data: {
+        name: name,
+        bio: bio,
+        birth: birth,
+      },
+      // Assign dialog width
+      width: '500px'
+    });
+  }
+
+  /**
+   * opens the user synopsis dialog from SynopsisComponent to displaying details
+   * @param title
+   * @param description
+   */
+  openSynopsisDialog(title: string, description: string): void {
+    this.dialog.open(SynopsisComponent, {
+      data: {
+        title: title,
+        description: description,
+      },
+      // Assign dialog width
+      width: '500px'
+    });
+  }
+
+  /**
+   * removes a movie from the list of favorite movies via an API call
+   * @param id 
+   * @function removeFavoriteMovie
+   */
+  removeFromFavoriteMovies(id: string, title: string): void {
+    console.log(id);
+    this.fetchApiData.removeFavoriteMovie(id).subscribe((res: any) => {
+      this.snackBar.open(`Successfully removed ${title} from favorite movies.`, 'OK', {
+        duration: 4000, verticalPosition: 'top'
+      });
+      setTimeout(function () {
+        window.location.reload();
+      }, 4000);
+    });
   }
 }

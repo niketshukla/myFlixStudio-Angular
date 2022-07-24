@@ -29,4 +29,43 @@
     </mat-card>
 
     <!-- Display Favorite Movies -->
+    <div class="favorite-movies-header">
+      <h2 class="mat-card-favorite-movies">Favorite Movies</h2>
+    </div>
+    <div class="favorite-movies-container">
+      <mat-card *ngFor="let movie of favoriteMovies;" class="favorite-movies">
+          <mat-card-header class="favorite-movies-title-header">
+              <mat-card-title class="favorite-movies-title">
+                {{movie.title}}
+              </mat-card-title>
+              <mat-card-subtitle>Directed by:
+                <button mat-button
+                    (click)="openDirectorDialog(movie.director.name, movie.director.bio, movie.director.birth)"
+                    color="primary">
+                    {{movie.director.name}}
+                </button>
+            </mat-card-subtitle>
+          </mat-card-header>
+              <img src={{movie.imagePath}} alt= {{movie.title}} />
+              <mat-card-actions>
+                <button mat-button (click)="openGenreDialog(movie.genre.name, movie.genre.description)" color="primary">
+                  Genre
+              </button>
+    
+              <button mat-button (click)="openSynopsisDialog(movie.title, movie.description)" color="primary">
+                  Synopsis
+              </button>
+          
+                  <mat-card-actions>
+                    <button 
+                      class="delete-fav-button"
+                      mat-icon-button 
+                      (click)="removeFromFavoriteMovies(movie._id, movie.title)"
+                    >
+                      <mat-icon>delete_outline</mat-icon>
+                    </button>
+                  </mat-card-actions>
+              </mat-card-actions>
+      </mat-card>
+    </div>
 </div>
